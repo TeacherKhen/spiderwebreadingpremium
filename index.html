@@ -26,24 +26,10 @@ button{cursor:pointer}
 .letter-node{position:absolute;transform:translate(-50%,-50%);width:var(--node-size);height:var(--node-size);border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 clamp(27px,4vw,39px) 'Comic Neue',sans-serif;transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),transform .2s,box-shadow .2s;z-index:10;padding:0;touch-action:manipulation}
 .letter-node:active{transform:translate(-50%,-50%) scale(.93)}
 .letter-node.selected{transform:translate(-50%,-50%) scale(1.09);z-index:12;outline:3px solid #ffdc57}
-
-/* Special styling for the 26-letter alphabet activity */
-#app.alphabet-mode .letter-node{
- width:clamp(36px,5.2vw,58px);
- height:clamp(36px,5.2vw,58px);
- font-size:clamp(22px,3vw,31px);
- border-width:2px;
-}
-#app.alphabet-mode .letter-node.selected{
- outline:3px solid #ffdc57;
-}
-#app.alphabet-mode #boardContainer{
- background-color:#ffffff35;
-}
-#app.alphabet-mode .web-thread{
- stroke-width:3.5;
-}
-
+#app.alphabet-mode .letter-node{width:clamp(36px,5.2vw,58px);height:clamp(36px,5.2vw,58px);font-size:clamp(22px,3vw,31px);border-width:2px}
+#app.alphabet-mode .letter-node.selected{outline:3px solid #ffdc57}
+#app.alphabet-mode #boardContainer{background-color:#ffffff35}
+#app.alphabet-mode .web-thread{stroke-width:3.5}
 #boardContainer{height:clamp(430px,66vh,650px);min-height:430px;position:relative;overflow:hidden;border-radius:28px;border:3px solid #ffffffa8;background:#ffffff2b;box-shadow:0 18px 50px #10182830;backdrop-filter:blur(2px)}
 #webSvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;overflow:visible}
 .web-thread{fill:none;stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 3px #ffffffb0);stroke-dasharray:9 5;animation:threadFlow 2s linear infinite}
@@ -87,7 +73,6 @@ button{cursor:pointer}
    <h1 class="text-4xl sm:text-5xl font-bold">Spiderweb Reading <span class="text-yellow-300">PREMIUM</span></h1>
    <p class="mt-2 text-white/90 font-bold">Connect the letters. Catch the word! · Teacher Khen</p>
   </div>
-
   <div class="p-5 sm:p-7 space-y-5">
    <div>
     <h2 class="display text-2xl font-bold text-slate-800 mb-3">Choose your game background</h2>
@@ -97,7 +82,6 @@ button{cursor:pointer}
      <button onclick="chooseTheme('spider')" id="themeSpider" class="theme-choice rounded-2xl border-4 border-transparent p-2 text-center"><img src="spiderman background.png" onerror="this.style.display='none'" class="w-full h-20 object-cover rounded-lg mb-2"><span class="font-extrabold">🕸️ Spider-Man</span></button>
     </div>
    </div>
-
    <div class="rounded-2xl bg-sky-50 border border-sky-100 p-4">
     <h3 class="display text-xl font-bold text-sky-900 mb-2">How to play</h3>
     <div id="welcomeInstructions" class="grid sm:grid-cols-2 gap-3 text-sm text-slate-700">
@@ -108,7 +92,6 @@ button{cursor:pointer}
     </div>
     <p class="text-xs mt-3 text-sky-900">Teacher tip: Choose a preset or edit the letters in Teacher Settings. Tap Clear Path to try another word.</p>
    </div>
-
    <div class="welcome-actions grid grid-cols-2 gap-3">
     <button onclick="startGame()" class="rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-extrabold py-4 shadow-lg"><i class="fa-solid fa-play mr-2"></i>Start Game</button>
     <button onclick="openSettingsFromWelcome()" class="rounded-2xl bg-slate-100 border-2 border-slate-200 text-slate-800 font-extrabold py-4"><i class="fa-solid fa-sliders mr-2"></i>Teacher Settings</button>
@@ -139,7 +122,6 @@ button{cursor:pointer}
    <button onclick="openPhotoViewer()" class="rounded-xl bg-pink-100 text-pink-800 px-3 py-2 font-extrabold"><i class="fa-solid fa-images mr-1"></i> Photos <span id="photoBadgeCount">0</span></button>
   </div>
  </section>
-
  <section id="boardContainer">
   <svg id="webSvg" aria-hidden="true"></svg>
   <div id="nodeLayer"></div>
@@ -168,19 +150,16 @@ button{cursor:pointer}
   <div class="p-4 bg-gradient-to-r from-violet-700 to-indigo-700 text-white flex justify-between items-center"><div><h2 class="display text-2xl font-bold">Teacher Settings</h2><p class="text-xs text-white/80">Choose presets, edit letters, and manage photos</p></div><button onclick="toggleSettingsModal(false)" class="w-10 h-10 rounded-full bg-white/20 text-xl">✕</button></div>
   <div class="flex-1 overflow-y-auto p-4 space-y-4">
    <section class="panel p-4"><h3 class="font-extrabold text-slate-800 mb-2"><i class="fa-solid fa-layer-group text-violet-600 mr-2"></i>Phonics presets</h3><p class="text-xs text-slate-500 mb-3">Choose a preset. Alphabet Warm-up uses all 26 letters scattered across the board. Connect A to Z in order.</p><div id="presetList" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div></section>
-
    <section class="panel p-4">
     <h3 class="font-extrabold mb-3"><i class="fa-solid fa-palette text-pink-500 mr-2"></i>Background & letter case</h3>
     <div class="grid grid-cols-3 gap-2 mb-3"><button onclick="chooseTheme('morning')" class="preset-btn">☀️ Morning</button><button onclick="chooseTheme('night')" class="preset-btn">🌙 Night</button><button onclick="chooseTheme('spider')" class="preset-btn">🕸️ Spider-Man</button></div>
     <div class="grid grid-cols-2 gap-2"><button onclick="changeGlobalCase('lower')" class="preset-btn">abc · Small letters</button><button onclick="changeGlobalCase('upper')" class="preset-btn">ABC · Capital letters</button></div>
    </section>
-
    <section class="panel p-4">
     <div class="flex justify-between items-center gap-2 mb-3"><h3 class="font-extrabold"><i class="fa-solid fa-grip text-indigo-500 mr-2"></i>Letter columns</h3><div class="flex items-center gap-2"><button onclick="adjustColumnCount(-1)" class="w-8 h-8 rounded-lg bg-slate-100 border font-black">−</button><span id="colCountText" class="font-black">3</span><button onclick="adjustColumnCount(1)" class="w-8 h-8 rounded-lg bg-slate-100 border font-black">+</button></div></div>
     <div id="columnEditorList" class="space-y-2"></div>
     <p id="columnHelp" class="text-xs text-slate-500 mt-2">Separate letters with commas. A completed path uses one selection from each column.</p>
    </section>
-
    <section class="panel p-4">
     <div class="flex items-center justify-between gap-2 mb-2"><h3 class="font-extrabold"><i class="fa-solid fa-images text-pink-500 mr-2"></i>Photo presets & library</h3><label class="cursor-pointer px-3 py-2 bg-pink-500 text-white rounded-xl text-xs font-extrabold">Add photos<input id="fileImageUpload" type="file" accept="image/*" multiple class="hidden" onchange="handleImageUpload(event)"></label></div>
     <p class="text-xs text-slate-500 mb-2">Picture presets load from <b>photos/</b> automatically: apple, cat, ball, boy, dog, ant, fish, fox, girl, goat, hat, jam, lake, lion, map, rat, net, ox, pig, sun, toy, van, six, box, and yam. Remove any picture with ×, or add more images below.</p>
@@ -188,7 +167,6 @@ button{cursor:pointer}
     <label class="block cursor-pointer text-center p-3 rounded-xl border-2 border-dashed border-pink-300 bg-pink-50 text-pink-800 font-extrabold text-sm">📂 Load all images from photos folder<input id="folderImageUpload" type="file" accept="image/*" multiple webkitdirectory directory class="hidden" onchange="handleImageUpload(event)"></label>
     <div id="imageGallery" class="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-3 max-h-64 overflow-y-auto"></div>
    </section>
-
    <section class="panel p-4">
     <h3 class="font-extrabold mb-2"><i class="fa-solid fa-file-arrow-down text-teal-600 mr-2"></i>Save or load activity</h3>
     <p class="text-xs text-slate-500 mb-3">Your JSON file stores the columns, background, letter case, alphabet mode, and any photos you added.</p>
@@ -205,6 +183,28 @@ button{cursor:pointer}
 
 <script>
 const ALPHABET='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+/* Alphabet Warm-up positions. Clear Path shuffles these positions only. */
+const ALPHABET_POSITIONS=[
+ [.10,.15],[.28,.12],[.48,.18],[.72,.12],[.90,.19],
+ [.84,.39],[.64,.34],[.43,.40],[.20,.33],[.09,.49],
+ [.28,.57],[.50,.52],[.72,.58],[.91,.65],[.81,.82],
+ [.59,.76],[.37,.85],[.15,.76],[.12,.62],[.39,.23],
+ [.61,.15],[.95,.47],[.69,.94],[.48,.94],[.25,.94],[.91,.91]
+];
+
+function shuffleAlphabetPositions(){
+ const positions=ALPHABET_POSITIONS.map(p=>[...p]);
+
+ for(let i=positions.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [positions[i],positions[j]]=[positions[j],positions[i]];
+ }
+
+ return positions;
+}
+
+let alphabetPositions=shuffleAlphabetPositions();
 
 const PRESETS={
  'CVC · Short A':[['b','c','m','s'],['a'],['t','p','n','g']],
@@ -254,39 +254,29 @@ let wordLocked=false;
 
 const THREAD_COLORS=['#fffdf5','#171717','#ffe34f','#ff3d4d','#35d07f','#75d7ff','#f8a5ff'];
 
-/* Theme and start-up */
 function chooseTheme(theme){
  activityState.theme=theme;
-
  const app=document.getElementById('app');
  app.classList.remove('theme-morning','theme-night','theme-spider');
  app.classList.add('theme-'+theme);
-
  document.querySelectorAll('.theme-choice').forEach(b=>b.style.borderColor='transparent');
-
  const active=document.getElementById('theme'+theme[0].toUpperCase()+theme.slice(1));
  if(active)active.style.borderColor='#fbbf24';
-
  renderBoard();
 }
 
 function startGame(){
  document.getElementById('welcomeScreen').style.display='none';
  settingsOpenedFromWelcome=false;
-
  const music=document.getElementById('bgMusic');
  music.volume=backgroundMusicVolume;
-
  if(musicOn){
   music.muted=false;
-  music.play().then(()=>{
-   setAudioStatus('Background music playing.');
-  }).catch(err=>{
+  music.play().then(()=>setAudioStatus('Background music playing.')).catch(err=>{
    setAudioStatus('Music could not play. Check music/background music.mp3 and try the Music button.');
    console.error('Background music could not start:',music.currentSrc,err);
   });
  }
-
  requestAnimationFrame(renderBoard);
 }
 
@@ -296,16 +286,13 @@ function openSettingsFromWelcome(){
  toggleSettingsModal(true);
 }
 
-/* Audio */
 function playAudio(id){
  const a=document.getElementById(id);
  if(!a)return;
-
  try{
   a.muted=false;
   a.volume=id==='successAudio'?.95:.8;
   a.currentTime=0;
-
   const p=a.play();
   if(p&&typeof p.catch==='function'){
    p.catch(err=>{
@@ -322,34 +309,27 @@ function playAudio(id){
 function setBackgroundVolume(value){
  const volume=Math.max(0,Math.min(100,Number(value)||0));
  backgroundMusicVolume=volume/100;
-
  const music=document.getElementById('bgMusic');
  if(music)music.volume=backgroundMusicVolume;
-
  const readout=document.getElementById('bgVolumeValue');
  if(readout)readout.textContent=volume+'%';
-
  const slider=document.getElementById('bgVolume');
  if(slider)slider.setAttribute('aria-valuetext',volume+' percent');
 }
 
 function toggleMusic(){
  musicOn=!musicOn;
-
  const a=document.getElementById('bgMusic');
  const b=document.getElementById('musicToggle');
-
  if(musicOn){
   a.volume=backgroundMusicVolume;
   a.muted=false;
-
   a.play().then(()=>{
    setAudioStatus(backgroundMusicVolume===0?'Background music is on, but volume is set to 0%.':'Background music playing.');
   }).catch(err=>{
    setAudioStatus('Music could not play. Check music/background music.mp3.');
    console.error('Background music failed:',a.currentSrc||a.src,err);
   });
-
   b.innerHTML='<i class="fa-solid fa-volume-high mr-1"></i> Music On';
   b.className='px-3 py-2 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold';
  }else{
@@ -365,14 +345,10 @@ function setAudioStatus(message){
  if(el)el.textContent=message;
 }
 
-/* Presets */
 function renderPresets(){
  document.getElementById('presetList').innerHTML=Object.entries(PRESETS).map(([name,cols])=>{
   const isAlphabet=name==='Alphabet warm-up';
-  const description=isAlphabet
-   ?'26 scattered letters · connect A–Z'
-   :cols.length+' columns · '+cols.map(c=>c.length).join(' / ')+' choices';
-
+  const description=isAlphabet?'26 scattered letters · connect A–Z':cols.length+' columns · '+cols.map(c=>c.length).join(' / ')+' choices';
   return `<button class="preset-btn ${isAlphabet&&activityState.alphabetMode?'active':''}" onclick="loadPreset('${name.replace(/'/g,"\\'")}')">
    <span class="block">${name}</span>
    <span class="block text-[11px] font-semibold text-slate-400 mt-1">${description}</span>
@@ -383,153 +359,98 @@ function renderPresets(){
 function loadPreset(name){
  const preset=PRESETS[name];
  if(!preset)return;
-
  activityState.alphabetMode=(name==='Alphabet warm-up');
-
- activityState.columns=preset.map(col=>
-  col.map(letter=>
-   activityState.letterCase==='upper'
-    ?letter.toUpperCase()
-    :letter.toLowerCase()
-  )
- );
-
+ activityState.columns=preset.map(col=>col.map(letter=>activityState.letterCase==='upper'?letter.toUpperCase():letter.toLowerCase()));
  activityState.columnCount=activityState.alphabetMode?26:preset.length;
+
+ if(activityState.alphabetMode){
+  alphabetPositions=shuffleAlphabetPositions();
+ }
 
  activePath=[];
  hideCompletion();
-
  renderPresets();
  renderColumnEditors();
  updateWordDisplay();
  renderBoard();
 }
 
-/* Board rendering */
 function renderBoard(){
  const container=document.getElementById('boardContainer');
  const layer=document.getElementById('nodeLayer');
  const svg=document.getElementById('webSvg');
-
  if(!container||!layer||!svg)return;
-
  const rect=container.getBoundingClientRect();
  if(!rect.width||!rect.height)return;
-
  const app=document.getElementById('app');
  app.classList.toggle('alphabet-mode',!!activityState.alphabetMode);
-
  layer.innerHTML='';
  svg.innerHTML='';
-
  const w=rect.width;
  const h=rect.height;
-
- if(activityState.alphabetMode){
-  renderAlphabetBoard(w,h,layer,svg);
- }else{
-  renderPhonicsBoard(w,h,layer,svg);
- }
-
+ if(activityState.alphabetMode)renderAlphabetBoard(w,h,layer,svg);
+ else renderPhonicsBoard(w,h,layer,svg);
  updateSpiderPosition();
 }
 
-/*
- Alphabet Warm-up:
- All 26 letters appear at scattered positions.
- The position list is deliberately fixed so letters do not jump around
- whenever a student selects a letter or the board redraws.
-*/
 function renderAlphabetBoard(w,h,layer,svg){
- const positions=[
-  [.10,.15],[.28,.12],[.48,.18],[.72,.12],[.90,.19],
-  [.84,.39],[.64,.34],[.43,.40],[.20,.33],[.09,.49],
-  [.28,.57],[.50,.52],[.72,.58],[.91,.65],[.81,.82],
-  [.59,.76],[.37,.85],[.15,.76],[.12,.62],[.39,.23],
-  [.61,.15],[.95,.47],[.69,.94],[.48,.94],[.25,.94],[.91,.91]
- ];
-
- const letters=ALPHABET.map(letter=>
-  activityState.letterCase==='upper'?letter:letter.toLowerCase()
- );
+ const letters=ALPHABET.map(letter=>activityState.letterCase==='upper'?letter:letter.toLowerCase());
 
  letters.forEach((letter,index)=>{
-  const [px,py]=positions[index];
+  const [px,py]=alphabetPositions[index];
   const x=Math.max(23,Math.min(w-23,w*px));
   const y=Math.max(23,Math.min(h-23,h*py));
-
   const node=document.createElement('button');
   node.type='button';
-
   const selected=activePath.some(p=>p.letter.toUpperCase()===letter.toUpperCase());
   node.className='letter-node'+(selected?' selected':'');
-
   node.style.left=x+'px';
   node.style.top=y+'px';
   node.textContent=letter;
   node.setAttribute('aria-label','Letter '+letter);
-
   node.addEventListener('click',()=>handleNodeClick(index,0,letter,x,y));
   layer.appendChild(node);
 
-  // Redraw every selected thread from the first letter to the current letter.
   const pathIndex=activePath.findIndex(p=>p.letter.toUpperCase()===letter.toUpperCase());
   if(pathIndex>=0){
    activePath[pathIndex].x=x;
    activePath[pathIndex].y=y;
   }
  });
-
  drawSelectedThreads(svg);
 }
 
 function renderPhonicsBoard(w,h,layer,svg){
  const n=Math.max(2,activityState.columnCount);
  const cw=w/n;
-
  activityState.columns.slice(0,n).forEach((letters,ci)=>{
   const rh=h/(letters.length+1);
-
   letters.forEach((letter,ri)=>{
    const x=cw*(ci+.5);
    const y=rh*(ri+1);
-
    const node=document.createElement('button');
    node.type='button';
-   node.className='letter-node'+(
-    activePath.some(p=>p.colIndex===ci&&p.rowIndex===ri)?' selected':''
-   );
-
+   node.className='letter-node'+(activePath.some(p=>p.colIndex===ci&&p.rowIndex===ri)?' selected':'');
    node.style.left=x+'px';
    node.style.top=y+'px';
    node.textContent=letter;
    node.setAttribute('aria-label','Letter '+letter);
-
    node.addEventListener('click',()=>handleNodeClick(ci,ri,letter,x,y));
    layer.appendChild(node);
   });
  });
-
  drawSelectedThreads(svg);
 }
 
 function drawSelectedThreads(svg){
  for(let i=0;i<activePath.length-1;i++){
-  const a=activePath[i];
-  const b=activePath[i+1];
-
+  const a=activePath[i],b=activePath[i+1];
   const path=document.createElementNS('http://www.w3.org/2000/svg','path');
   const dx=(b.x-a.x)*.48;
-
-  path.setAttribute(
-   'd',
-   `M ${a.x} ${a.y} C ${a.x+dx} ${a.y}, ${b.x-dx} ${b.y}, ${b.x} ${b.y}`
-  );
-
+  path.setAttribute('d',`M ${a.x} ${a.y} C ${a.x+dx} ${a.y}, ${b.x-dx} ${b.y}, ${b.x} ${b.y}`);
   path.setAttribute('class','web-thread');
   path.setAttribute('stroke',THREAD_COLORS[i%THREAD_COLORS.length]);
   svg.appendChild(path);
-
   const glimmer=path.cloneNode();
   glimmer.setAttribute('stroke','#ffffff');
   glimmer.setAttribute('stroke-width','1.5');
@@ -540,7 +461,6 @@ function drawSelectedThreads(svg){
 
 function updateSpiderPosition(){
  const spider=document.getElementById('crawlingSpider');
-
  if(activePath.length){
   const last=activePath[activePath.length-1];
   spider.style.left=last.x+'px';
@@ -551,15 +471,12 @@ function updateSpiderPosition(){
  }
 }
 
-/* Letter selection */
 function handleNodeClick(ci,ri,letter,x,y){
  if(wordLocked)return;
 
  if(activityState.alphabetMode){
   const expectedIndex=activePath.length;
-
   if(expectedIndex>=ALPHABET.length)return;
-
   const expectedLetter=ALPHABET[expectedIndex];
 
   if(letter.toUpperCase()!==expectedLetter){
@@ -569,101 +486,57 @@ function handleNodeClick(ci,ri,letter,x,y){
   }
 
   playAudio('clickAudio');
-
-  activePath.push({
-   colIndex:ci,
-   rowIndex:ri,
-   letter,
-   x,
-   y
-  });
-
+  activePath.push({colIndex:ci,rowIndex:ri,letter,x,y});
   renderBoard();
   updateWordDisplay();
-
-  if(activePath.length===ALPHABET.length){
-   onWordCompleted();
-  }
-
+  if(activePath.length===ALPHABET.length)onWordCompleted();
   return;
  }
 
- // Normal phonics gameplay remains unchanged.
  playAudio('clickAudio');
-
  if(activePath.length&&ci!==activePath.length){
-  if(ci<activePath.length){
-   activePath=activePath.slice(0,ci);
-  }else{
-   return;
-  }
+  if(ci<activePath.length)activePath=activePath.slice(0,ci);
+  else return;
  }
-
  if(ci!==activePath.length)return;
-
  activePath.push({colIndex:ci,rowIndex:ri,letter,x,y});
-
  renderBoard();
  updateWordDisplay();
-
- if(activePath.length===activityState.columnCount){
-  onWordCompleted();
- }
+ if(activePath.length===activityState.columnCount)onWordCompleted();
 }
 
 function showExpectedLetter(letter){
  const el=document.getElementById('wordDisplay');
-
- el.innerHTML=
-  '<span class="text-base font-extrabold text-amber-700">'+
-  'Find '+letter+' next!'+
-  '</span>';
+ el.innerHTML='<span class="text-base font-extrabold text-amber-700">Find '+letter+' next!</span>';
 }
 
 function updateWordDisplay(){
  const el=document.getElementById('wordDisplay');
-
  if(!activePath.length){
   el.innerHTML=activityState.alphabetMode
    ?'<span class="text-base text-slate-400 font-semibold">Find A to begin the alphabet spiderweb!</span>'
    :'<span class="text-base text-slate-400 font-semibold">Choose a letter in the first column.</span>';
   return;
  }
-
  if(activityState.alphabetMode){
-  el.innerHTML=activePath.map(p=>
-   `<span class="inline-flex items-center justify-center rounded-lg bg-white/90 border-2 border-violet-200 px-2 py-1 shadow-sm text-xl" style="font-family:'Comic Neue',sans-serif">${escapeHtml(p.letter)}</span>`
-  ).join('');
+  el.innerHTML=activePath.map(p=>`<span class="inline-flex items-center justify-center rounded-lg bg-white/90 border-2 border-violet-200 px-2 py-1 shadow-sm text-xl" style="font-family:'Comic Neue',sans-serif">${escapeHtml(p.letter)}</span>`).join('');
   return;
  }
-
- el.innerHTML=activePath.map(p=>
-  `<span class="inline-flex items-center justify-center rounded-xl bg-white/90 border-2 border-violet-200 px-3 py-1 shadow-sm" style="font-family:'Comic Neue',sans-serif">${escapeHtml(p.letter)}</span>`
- ).join('<span class="text-violet-700">·</span>');
+ el.innerHTML=activePath.map(p=>`<span class="inline-flex items-center justify-center rounded-xl bg-white/90 border-2 border-violet-200 px-3 py-1 shadow-sm" style="font-family:'Comic Neue',sans-serif">${escapeHtml(p.letter)}</span>`).join('<span class="text-violet-700">·</span>');
 }
 
 function escapeHtml(s){
- return String(s).replace(/[&<>"']/g,c=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
- }[c]));
+ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* Completion */
 function onWordCompleted(){
  wordLocked=true;
-
  const word=activePath.map(p=>p.letter).join('');
  const completedWord=document.getElementById('completedWord');
  const title=document.getElementById('completionTitle');
  const message=document.getElementById('completionMessage');
-
  completedWord.textContent=word;
  completedWord.classList.toggle('alphabet-result',activityState.alphabetMode);
-
  if(activityState.alphabetMode){
   title.textContent='Amazing! You connected A to Z!';
   message.textContent='You completed all 26 letters!';
@@ -671,16 +544,11 @@ function onWordCompleted(){
   title.textContent='You made a word!';
   message.textContent='Sound it out and read aloud!';
  }
-
  document.getElementById('completeOverlay').classList.add('show');
-
  score++;
  document.getElementById('score').textContent=score;
-
  playAudio('successAudio');
-
- document.getElementById('wordDisplay').innerHTML=
-  '<span class="font-black text-emerald-700">'+escapeHtml(word)+'</span>';
+ document.getElementById('wordDisplay').innerHTML='<span class="font-black text-emerald-700">'+escapeHtml(word)+'</span>';
 }
 
 function hideCompletion(){
@@ -695,14 +563,19 @@ function nextWord(){
  renderBoard();
 }
 
+/* Clear Path: shuffle letter positions only in Alphabet Warm-up. */
 function clearPath(){
  hideCompletion();
  activePath=[];
+
+ if(activityState.alphabetMode){
+  alphabetPositions=shuffleAlphabetPositions();
+ }
+
  updateWordDisplay();
  renderBoard();
 }
 
-/* Teacher settings */
 function renderColumnEditors(){
  const countText=document.getElementById('colCountText');
  const editor=document.getElementById('columnEditorList');
@@ -710,69 +583,47 @@ function renderColumnEditors(){
 
  if(activityState.alphabetMode){
   countText.textContent='26 letters';
-
-  editor.innerHTML=`
-   <div class="rounded-xl border border-violet-200 bg-violet-50 p-4">
-    <p class="font-extrabold text-violet-900 mb-1">🕸️ Alphabet Spiderweb</p>
-    <p class="text-sm text-slate-700">All 26 letters are scattered across the board. Students connect A to Z in alphabetical order. The letters are arranged automatically.</p>
-   </div>`;
-
+  editor.innerHTML=`<div class="rounded-xl border border-violet-200 bg-violet-50 p-4">
+   <p class="font-extrabold text-violet-900 mb-1">🕸️ Alphabet Spiderweb</p>
+   <p class="text-sm text-slate-700">All 26 letters are scattered across the board. Students connect A to Z in alphabetical order. Use Clear Path to shuffle the letters for another round.</p>
+  </div>`;
   help.textContent='Alphabet mode uses all 26 letters. The column controls are disabled for this preset.';
   return;
  }
 
  countText.textContent=activityState.columnCount;
  help.textContent='Separate letters with commas. A completed path uses one selection from each column.';
-
  editor.innerHTML=activityState.columns.slice(0,activityState.columnCount).map((col,i)=>
   `<label class="flex items-center gap-2 rounded-xl bg-slate-50 border p-2">
    <span class="w-16 text-xs font-black text-indigo-700">Column ${i+1}</span>
-   <input class="min-w-0 flex-1 rounded-lg border px-3 py-2 text-sm font-bold"
-    value="${escapeHtml(col.join(', '))}"
-    onchange="updateColumnLetters(${i},this.value)"
-    aria-label="Column ${i+1} letters">
+   <input class="min-w-0 flex-1 rounded-lg border px-3 py-2 text-sm font-bold" value="${escapeHtml(col.join(', '))}" onchange="updateColumnLetters(${i},this.value)" aria-label="Column ${i+1} letters">
   </label>`
  ).join('');
 }
 
 function adjustColumnCount(delta){
  if(activityState.alphabetMode)return;
-
  const count=Math.max(2,Math.min(6,activityState.columnCount+delta));
  if(count===activityState.columnCount)return;
-
  activityState.columnCount=count;
-
- while(activityState.columns.length<count){
-  activityState.columns.push(['a','e','i']);
- }
-
+ while(activityState.columns.length<count)activityState.columns.push(['a','e','i']);
  activityState.columns=activityState.columns.slice(0,count);
-
  clearPath();
  renderColumnEditors();
 }
 
 function updateColumnLetters(i,value){
  if(activityState.alphabetMode)return;
-
  activityState.columns[i]=value.split(',').map(s=>s.trim()).filter(Boolean);
  clearPath();
 }
 
 function changeGlobalCase(type){
  activityState.letterCase=type;
-
- activityState.columns=activityState.columns.map(col=>
-  col.map(s=>type==='upper'?s.toUpperCase():s.toLowerCase())
- );
-
+ activityState.columns=activityState.columns.map(col=>col.map(s=>type==='upper'?s.toUpperCase():s.toLowerCase()));
  if(activityState.alphabetMode){
-  activityState.columns=[ALPHABET.map(letter=>
-   type==='upper'?letter:letter.toLowerCase()
-  )];
+  activityState.columns=[ALPHABET.map(letter=>type==='upper'?letter:letter.toLowerCase())];
  }
-
  renderColumnEditors();
  renderPresets();
  clearPath();
@@ -780,64 +631,47 @@ function changeGlobalCase(type){
 
 function toggleSettingsModal(show){
  document.getElementById('settingsModal').classList.toggle('hidden',!show);
-
  if(show)renderColumnEditors();
  else if(settingsOpenedFromWelcome){
   settingsOpenedFromWelcome=false;
   document.getElementById('welcomeScreen').style.display='flex';
  }
-
  requestAnimationFrame(renderBoard);
 }
 
-/* Photo gallery */
 function handleImageUpload(e){
  const files=Array.from(e.target.files||[]);
  const images=files.filter(f=>f.type.startsWith('image/'));
-
  if(!images.length){
   setAudioStatus('No image files selected. Choose PNG/JPG files inside photos/.');
   return;
  }
-
  images.forEach(file=>{
   const reader=new FileReader();
-
   reader.onload=ev=>{
    const name=file.webkitRelativePath||file.name;
    const baseName=name.split('/').pop();
-
-   const existing=uploadedPhotos.findIndex(p=>
-    p.name.split('/').pop().toLowerCase()===baseName.toLowerCase()
-   );
-
+   const existing=uploadedPhotos.findIndex(p=>p.name.split('/').pop().toLowerCase()===baseName.toLowerCase());
    const item={name,data:ev.target.result};
-
    if(existing>=0)uploadedPhotos[existing]=item;
    else uploadedPhotos.push(item);
-
    renderPhotoGallery();
    updatePhotoViewer();
   };
-
   reader.onerror=()=>console.error('Could not read image file:',file.name);
   reader.readAsDataURL(file);
  });
-
  setAudioStatus('Loading '+images.length+' selected image(s) from your folder.');
  e.target.value='';
 }
 
 function renderPhotoGallery(){
  document.getElementById('photoBadgeCount').textContent=uploadedPhotos.length;
-
  const g=document.getElementById('imageGallery');
-
  if(!uploadedPhotos.length){
   g.innerHTML='<p class="col-span-full text-center text-slate-400 text-xs py-4">No photos loaded. Select the photos/ folder or add individual images.</p>';
   return;
  }
-
  g.innerHTML=uploadedPhotos.map((p,i)=>
   `<div class="photo-tile relative rounded-xl border bg-white p-1">
    <img src="${p.data||p.src}" alt="${escapeHtml(p.name)}" onerror="this.style.opacity='.35';this.title='Image not found: '+this.alt">
@@ -866,9 +700,7 @@ function closePhotoViewer(){
 function updatePhotoViewer(){
  const img=document.getElementById('viewerImage');
  const empty=document.getElementById('noPhotosPrompt');
-
  document.getElementById('photoTotalCount').textContent=uploadedPhotos.length;
-
  if(!uploadedPhotos.length){
   img.classList.add('hidden');
   img.removeAttribute('src');
@@ -898,55 +730,37 @@ function prevPhoto(){
  }
 }
 
-/* Save and load activity */
 function exportData(){
- const payload={
-  format:'teacher-khen-spiderweb-premium-v1',
-  activityState,
-  uploadedPhotos,
-  score
- };
-
+ const payload={format:'teacher-khen-spiderweb-premium-v1',activityState,uploadedPhotos,score};
  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob);
  const a=document.createElement('a');
-
  a.href=url;
  a.download='teacher-khen-spiderweb-activity.json';
  a.click();
-
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
 function importData(e){
  const file=e.target.files&&e.target.files[0];
  if(!file)return;
-
  const reader=new FileReader();
-
  reader.onload=ev=>{
   try{
    const data=JSON.parse(ev.target.result);
    const state=data.activityState||data;
-
    if(!Array.isArray(state.columns))throw Error('Missing columns');
-
    activityState={...activityState,...state};
-
    activityState.alphabetMode=Boolean(activityState.alphabetMode);
 
    if(activityState.alphabetMode){
-    activityState.columns=[ALPHABET.map(letter=>
-     activityState.letterCase==='upper'?letter:letter.toLowerCase()
-    )];
+    activityState.columns=[ALPHABET.map(letter=>activityState.letterCase==='upper'?letter:letter.toLowerCase())];
     activityState.columnCount=26;
+    alphabetPositions=shuffleAlphabetPositions();
    }else{
     activityState.columnCount=Math.max(2,Math.min(6,Number(activityState.columnCount)||3));
     activityState.columns=activityState.columns.slice(0,6).map(c=>Array.isArray(c)?c:[]);
-
-    while(activityState.columns.length<activityState.columnCount){
-     activityState.columns.push(['a','e','i']);
-    }
+    while(activityState.columns.length<activityState.columnCount)activityState.columns.push(['a','e','i']);
    }
 
    uploadedPhotos=Array.isArray(data.uploadedPhotos)
@@ -955,14 +769,12 @@ function importData(e){
 
    score=Number(data.score)||0;
    document.getElementById('score').textContent=score;
-
    chooseTheme(activityState.theme||'morning');
    renderPresets();
    renderColumnEditors();
    renderPhotoGallery();
    updatePhotoViewer();
    clearPath();
-
    alert('Activity loaded successfully!');
   }catch(err){
    console.error(err);
@@ -971,7 +783,6 @@ function importData(e){
    e.target.value='';
   }
  };
-
  reader.readAsText(file);
 }
 
@@ -979,34 +790,25 @@ function importData(e){
 (()=>{
  const card=document.getElementById('floatingPhotoCard');
  const head=document.getElementById('photoHeader');
-
  let drag=false,dx=0,dy=0;
-
  head.addEventListener('pointerdown',e=>{
   if(e.target.closest('button'))return;
-
   drag=true;
-
   const r=card.getBoundingClientRect();
   dx=e.clientX-r.left;
   dy=e.clientY-r.top;
-
   head.setPointerCapture(e.pointerId);
  });
-
  head.addEventListener('pointermove',e=>{
   if(!drag)return;
-
   card.style.left=Math.max(4,Math.min(innerWidth-card.offsetWidth-4,e.clientX-dx))+'px';
   card.style.top=Math.max(4,Math.min(innerHeight-card.offsetHeight-4,e.clientY-dy))+'px';
   card.style.right='auto';
  });
-
  head.addEventListener('pointerup',()=>drag=false);
  head.addEventListener('pointercancel',()=>drag=false);
 })();
 
-/* Audio files */
 const AUDIO_FILES={
  bgMusic:'music/background music.mp3',
  clickAudio:'music/click.mp3',
@@ -1015,40 +817,27 @@ const AUDIO_FILES={
 
 Object.entries(AUDIO_FILES).forEach(([id,path])=>{
  const a=document.getElementById(id);
-
  a.src=assetUrl(path);
-
  if(id==='bgMusic')a.volume=backgroundMusicVolume;
-
  a.load();
-
  a.addEventListener('error',()=>{
   setAudioStatus('Could not load '+path+'. Confirm the exact filename and upload the music/ folder beside this HTML file.');
   console.error('Audio file could not load:',a.currentSrc||a.src,'Expected relative path:',path);
  });
-
- a.addEventListener('canplaythrough',()=>{
-  setAudioStatus('Audio files are loading correctly.');
- });
+ a.addEventListener('canplaythrough',()=>setAudioStatus('Audio files are loading correctly.'));
 });
 
-/* Check whether the preset picture paths are available. */
 window.addEventListener('load',()=>{
  const first=uploadedPhotos[0];
-
  if(first){
   const probe=new Image();
-
   probe.onload=()=>setAudioStatus('Asset paths active. Picture presets use photos/ and audio uses music/.');
   probe.onerror=()=>setAudioStatus('Cannot find '+first.name+'. Ensure photos/ is beside this HTML and contains the exact PNG filenames.');
-
   probe.src=first.src;
  }
 });
 
-/* Initial setup */
 window.addEventListener('resize',renderBoard);
-
 renderPresets();
 renderColumnEditors();
 renderPhotoGallery();
